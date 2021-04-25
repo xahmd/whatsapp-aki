@@ -1,6 +1,8 @@
 # whatsapp-aki
 WhatsApp akinator using aki-api &amp; venom
-
+<img size=35px; src="https://a.top4top.io/p_19416fa801.png">
+<br>
+<bt>
 **run steps**
 1- download nodejs <br>
 <a href="https://nodejs.org/dist/v14.15.5/node-v14.15.5-x64.msi">Download here - للتحميل اضغط هنا</a>
