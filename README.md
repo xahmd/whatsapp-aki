@@ -23,4 +23,4 @@ type play in the chat and it will start the game
 
 enjoy. <br>
 instagram : @9wmm <br>
-discord : 9wmm#5924
+discord : 9wmm#4790
