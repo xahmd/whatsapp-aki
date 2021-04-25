@@ -15,6 +15,8 @@ WhatsApp akinator using aki-api &amp; venom
 and scan the QR from you'r phone and it will run
 ```
 type play in the chat and it will start the game
+<br>
+<br>
 ! to change the language , just change "ar" in line 3 to "X" language you want.
 ----------------
 
