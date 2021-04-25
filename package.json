@@ -1,0 +1,14 @@
+{
+  "name": "alo3ndelag",
+  "version": "1.0.0",
+  "description": "wa by ahmed",
+  "main": "index.js",
+  "dependencies": {
+    "venom-bot": "^3.0.14",
+    "aki-api": "^5.2.1"
+  },
+  "scripts": {
+    "test": "node index.js"
+  },
+  "license": "MIT"
+}
