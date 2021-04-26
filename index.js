@@ -2,10 +2,9 @@ const venom = require("venom-bot");
 const { Aki } = require("aki-api");
 const region = "ar";
 const aki = new Aki(region);
+const gamearray = [];
 
-const gamrarray = [];
-
-venom
+venom 
   .create(" ")
   .then((client) => start(client))
   .catch((erro) => {
@@ -18,9 +17,9 @@ function start(client) {
       if (
         message.body.toLowerCase().includes("cancel") &&
         message.isGroupMsg === false &&
-        gamrarray.includes(message.from)
+        gamearray.includes(message.from)
       ) {
-        gamrarray.pop();
+        gamearray.pop();
 
         return client.sendText(
           message.from,
@@ -28,7 +27,19 @@ function start(client) {
         );
       }
 
-    
+      if (gamearray.includes(message.from)) {
+        if (aki.progress >= 70 || aki.currentStep >= 78) {
+          await aki.win();
+          console.log(message.from + ":", aki.answers[0]);
+          gamearray.pop();
+          return client.sendText(
+            message.from,
+            "انتهت اللعبة! \n أعتقد أن شخصيتك هي ... *"+ "*" +
+            aki.answers[0].name +"*" +
+            `*\n \n أتمنى أن أكون على صواب! للعب مرة أخرى اكتب "play"` + "\n \n Made By Ahmed."
+            );
+        }
+
         switch (message.body.toLowerCase()) {
           case "نعم":
             await aki.step(0);
@@ -58,7 +69,7 @@ function start(client) {
             );
 
           case "انا لا اعلم":
-            await aki.step(2);
+              await aki.step(2);
             return client.sendText(
               message.from,
               aki.question + "\n\n" + aki.answers.join("\n")
@@ -71,26 +82,27 @@ function start(client) {
               aki.question + "\n\n" + aki.answers.join("\n")
             );
 
-          case "من الممكن":
+            case "من الممكن":
             await aki.step(3);
             return client.sendText(
               message.from,
               aki.question + "\n\n" + aki.answers.join("\n")
             );
 
-          case "من الممكن":
+            case "من الممكن":
+            await aki.step(3);
+            return client.sendText(
+              message.from,
+              aki.question + "\n\n" + aki.answers.join("\n")
+            );
+
+            case "الظاهر لا":
             await aki.step(4);
             return client.sendText(
               message.from,
               aki.question + "\n\n" + aki.answers.join("\n")
             );
 
-          case "الظاهر لا":
-            await aki.step(4);
-            return client.sendText(
-              message.from,
-              aki.question + "\n\n" + aki.answers.join("\n")
-            );
             case "الظاهر لا":
               await aki.step(4);
               return client.sendText(
@@ -105,7 +117,7 @@ function start(client) {
       if (
         message.body.toLowerCase().includes("cancel") &&
         message.isGroupMsg === false &&
-        !gamrarray.includes(message.from)
+        !gamearray.includes(message.from)
       ) {
         return client.sendText(
           message.from,
@@ -124,31 +136,19 @@ function start(client) {
             `\n type play to start a game"`
         );
       }
-
       if (
         message.body.toLowerCase().includes("play") &&
         message.isGroupMsg === false
       ) {
-        if (gamrarray.includes(message.from)) {
+        if (gamearray.includes(message.from)) {
           return client.sendText(
             message.from,
             `لديك بالفعل لعبة مفتوحة ، إذا كنت تريد إنهاء اللعبة ، أرسل "إلغاء""`
           );
         }
-        if (gamrarray.includes(message.from)) {
-          if (aki.progress >= 70 || aki.currentStep >= 78) {
-            await aki.win();
-            console.log(message.from + ":", aki.answers[0]);
-            gamrarray.pop();
-            return client.sendText(
-              message.from,
-              "انتهت اللعبة! \n أعتقد أن شخصيتك هي ... *"+ "*" +
-                aki.answers[0].name +"*" +
-                `*\n \n أتمنى أن أكون على صواب! للعب مرة أخرى اكتب "play"` + "\n \n Made By Ahmed."
-            );
-          }
+
         await aki.start();
-        gamrarray.push(message.from);
+        gamearray.push(message.from);
 
         client.sendText(
           message.from,
